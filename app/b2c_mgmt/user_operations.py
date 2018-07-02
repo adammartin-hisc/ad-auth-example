@@ -63,17 +63,16 @@ def _user_url(config, user_id):
 def _user_create_parameters(first_name, last_name, email, config):
 	return HISCUserCreateParameters(
 		account_enabled=True,
+		sign_in_names=[_sign_in_name(email)],
+		creation_type='LocalAccount',
 		display_name='{}.{}'.format(first_name, last_name),
+		mail_nickname=_mail_nickname(email),
 		password_profile=_password_profile(config),
 		user_principal_name=_principle_name(email, config),
-		mail_nickname=_mail_nickname(email),
 		given_name=first_name,
 		surname=last_name,
-		user_type='Guest',
 		other_mails=[email],
-		sign_in_names=[_sign_in_name(email)],
-		usage_location='US',
-		creation_type='LocalAccount'
+		usage_location='US'
     )
 
 def _password_profile(config):
